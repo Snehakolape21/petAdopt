@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="container mx-auto px-4 py-8">
+    <h2 class="text-2xl font-bold mb-6 text-center text-indigo-800">🐾 My Adopted Pets</h2>
+
+    {% if adoptions %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for adopt in adoptions %}
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <img src="{{ adopt.petid.image.url }}" alt="{{ adopt.petid.name }}" class="rounded-lg h-48 w-full object-cover mb-3">
+                <h3 class="text-lg font-semibold">{{ adopt.petid.name }}</h3>
+                <p class="text-gray-600">{{ adopt.petid.description|truncatechars:100 }}</p>
+                <p class="mt-2 text-sm text-gray-500">Age: {{ adopt.petid.age }} years</p>
+                <p class="mt-1 text-sm text-gray-500">Adopted on: {{ adopt.adopt_date|date:"d M Y" }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-gray-600">You haven’t adopted any pets yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

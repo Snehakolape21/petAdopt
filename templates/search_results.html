@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container mx-auto py-8">
+    <h2 class="text-2xl font-bold mb-4">Search results for "{{ query }}"</h2>
+
+    {% if results %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {% for pet in results %}
+            <div class="bg-white shadow rounded-lg p-4">
+                <img src="{{ pet.image.url }}" class="h-40 w-full object-cover rounded">
+                <h3 class="text-xl font-semibold mt-2">{{ pet.name }}</h3>
+                <p class="text-sm text-gray-500">Type: {{ pet.type }}</p>
+                <p class="text-sm">Age: {{ pet.age }} years</p>
+                <p class="text-green-600 font-bold">₹{{ pet.price }}</p>
+                <a href="/addtocart/{{ pet.id }}" class="block mt-2 text-center bg-indigo-600 text-white py-1 rounded hover:bg-indigo-700">
+                    Add to Cart
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-gray-600">No pets found matching your search.</p> 
+    {% endif %}
+</div>
+{% endblock %}

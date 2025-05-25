@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0 rounded-4 p-4 text-center">
+                <img src="https://razorpay.com/assets/razorpay-glyph.svg" alt="Razorpay Logo" style="height: 50px;" class="mb-3">
+
+                <h3 class="fw-bold mb-3">Confirm Your Payment</h3>
+                <p class="text-muted fs-5">
+                    You are about to pay: <span class="fw-bold text-success">₹{{ total }}</span>
+                </p>
+
+                <button id="rzp-button1" class="btn btn-success btn-lg w-100 rounded-pill mb-3"> 
+                    💳 Pay Securely with Razorpay
+                </button>
+
+                <a href="/confirmadopt" class="btn btn-outline-dark w-100 rounded-pill">
+                    ← back to Cart
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Razorpay Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_test_5tcqyKP7gK3N5l",
+    "amount": "{{ data.amount }}",  // In paise
+    "currency": "INR",
+    "name": "petAdopt",
+    "description": "Product Purchase",
+    "image": "https://razorpay.com/assets/razorpay-glyph.svg",
+    "order_id": "{{ data.id }}",
+    "handler": function (response){
+        window.location.href = "/adopt_success";
+    },
+    "prefill": {
+        "name": "{{ username }}",
+        "email": "{{ email }}",
+        "contact": "{{ contact }}"
+    },
+    "theme": {
+        "color": "#0d6efd"
+    }
+};
+
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+};
+</script>
+
+{% endblock %}
+
