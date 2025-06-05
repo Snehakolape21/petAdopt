@@ -13,7 +13,7 @@
 ![Image](https://github.com/user-attachments/assets/90c72fac-bb33-4665-bddf-339e2cd53d70)
 
 
-🐶 Pet Details
+🐶 Pet adopt page
 ![Image](https://github.com/user-attachments/assets/079f4414-6b25-42aa-8349-264fccc04c82)
 
 💳 Payment Page
